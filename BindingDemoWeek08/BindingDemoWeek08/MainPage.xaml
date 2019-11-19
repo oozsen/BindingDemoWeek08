@@ -4,13 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:BindingDemoWeek08"
              x:Class="BindingDemoWeek08.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <ContentPage.BindingContext>
+        <local:MainViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0"/>
+    </ContentPage.Padding>
+
+    <StackLayout Padding="20">
+        <Entry Text="{Binding Name}" Placeholder="Enter Name"/>
+        <Label Text="{Binding DisplayName}" Rotation="{Binding Source={x:Reference slider}, Path=Value}" 
+               HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Slider x:Name="slider" Minimum="0" Maximum="360"/>
     </StackLayout>
 
 </ContentPage>
